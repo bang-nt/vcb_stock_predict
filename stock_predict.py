@@ -75,13 +75,13 @@ predicted_stock_price = regressor.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 
 # Ve bieu do gia that va gia du doan
-plt.plot(real_stock_price, color = 'red', label = 'Real VCB Stock Price')
-plt.plot(predicted_stock_price, color = 'blue', label = 'Predicted VCB Stock Price')
-plt.title('VCB Stock Price Prediction')
-plt.xlabel('Time')
-plt.ylabel('VCB Stock Price')
-plt.legend()
-plt.show()
+# plt.plot(real_stock_price, color = 'red', label = 'Real VCB Stock Price')
+# plt.plot(predicted_stock_price, color = 'blue', label = 'Predicted VCB Stock Price')
+# plt.title('VCB Stock Price Prediction')
+# plt.xlabel('Time')
+# plt.ylabel('VCB Stock Price')
+# plt.legend()
+# plt.show()
 
 # Du doan tiep gia 7 ngay tiep theo
 

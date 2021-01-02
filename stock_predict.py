@@ -50,7 +50,7 @@ if path.exists("mymodel.h5"):
     regressor.load_weights("mymodel.h5")
 else:
     # Con khong thi train
-    regressor.fit(X_train, y_train, epochs = 100, batch_size = 32)
+    regressor.fit(X_train, y_train, epochs = 150, batch_size = 32)
     regressor.save("mymodel.h5")
 
 # Load du lieu tu 1/1/2019 - 2/10/2019
@@ -75,47 +75,47 @@ predicted_stock_price = regressor.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 
 # Ve bieu do gia that va gia du doan
-# plt.plot(real_stock_price, color = 'red', label = 'Real VCB Stock Price')
-# plt.plot(predicted_stock_price, color = 'blue', label = 'Predicted VCB Stock Price')
-# plt.title('VCB Stock Price Prediction')
-# plt.xlabel('Time')
-# plt.ylabel('VCB Stock Price')
-# plt.legend()
-# plt.show()
+plt.plot(real_stock_price, color = 'red', label = 'Real VCB Stock Price')
+plt.plot(predicted_stock_price, color = 'blue', label = 'Predicted VCB Stock Price')
+plt.title('VCB Stock Price Prediction')
+plt.xlabel('Time')
+plt.ylabel('VCB Stock Price')
+plt.legend()
+plt.show()
 
-# Du doan tiep gia 7 ngay tiep theo
-
-
-dataset_test = dataset_test['CLOSE'][len(dataset_test)-60:len(dataset_test)].to_numpy()
-dataset_test = np.array(dataset_test)
-
-inputs = dataset_test
-inputs = inputs.reshape(-1,1)
-inputs = sc.transform(inputs)
+# # Du doan tiep gia 7 ngay tiep theo
 
 
-i = 1
-while i<8:
-    X_test = []
-    no_of_sample = len(dataset_test)
+# dataset_test = dataset_test['CLOSE'][len(dataset_test)-60:len(dataset_test)].to_numpy()
+# dataset_test = np.array(dataset_test)
 
-    # Lay du lieu cuoi cung
-    X_test.append(inputs[no_of_sample - 60:no_of_sample, 0])
-    X_test = np.array(X_test)
-    X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
+# inputs = dataset_test
+# inputs = inputs.reshape(-1,1)
+# inputs = sc.transform(inputs)
 
-    # Du doan gia
-    predicted_stock_price = regressor.predict(X_test)
 
-    # chuyen gia tu khoang (0,1) thanh gia that
-    predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+# i = 1
+# while i<8:
+#     X_test = []
+#     no_of_sample = len(dataset_test)
 
-    # Them ngay hien tai vao
-    dataset_test = np.append(dataset_test, predicted_stock_price[0], axis=0)
-    inputs = dataset_test
-    inputs = inputs.reshape(-1, 1)
-    inputs = sc.transform(inputs)
+#     # Lay du lieu cuoi cung
+#     X_test.append(inputs[no_of_sample - 60:no_of_sample, 0])
+#     X_test = np.array(X_test)
+#     X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 
-    print(f'Stock price 0{i}/01/2020 of VCB : {predicted_stock_price[0][0]}')
-    i = i +1
+#     # Du doan gia
+#     predicted_stock_price = regressor.predict(X_test)
+
+#     # chuyen gia tu khoang (0,1) thanh gia that
+#     predicted_stock_price = sc.inverse_transform(predicted_stock_price)
+
+#     # Them ngay hien tai vao
+#     dataset_test = np.append(dataset_test, predicted_stock_price[0], axis=0)
+#     inputs = dataset_test
+#     inputs = inputs.reshape(-1, 1)
+#     inputs = sc.transform(inputs)
+
+#     print(f'Stock price 0{i}/01/2020 of VCB : {predicted_stock_price[0][0]}')
+#     i = i +1
 
